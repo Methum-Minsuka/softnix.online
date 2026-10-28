@@ -66,6 +66,107 @@
         .perspective-btn:hover .btn-inner {
             transform: rotateX(360deg);
         }
+        .catalog-timeline {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: minmax(0, 1fr);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .catalog-timeline::before {
+            background: linear-gradient(to bottom, transparent, rgba(249, 115, 22, 0.75) 12%, rgba(71, 85, 105, 0.7) 88%, transparent);
+            content: "";
+            left: 0.375rem;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+        }
+        .catalog-timeline-item {
+            grid-column: 1;
+            position: relative;
+            text-align: left;
+        }
+        .catalog-timeline-card {
+            background: rgba(17, 24, 39, 0.82);
+            border: 1px solid rgba(51, 65, 85, 0.85);
+            border-radius: 1rem;
+            display: block;
+            padding: 2.75rem 1.25rem 1.125rem;
+            position: relative;
+            text-align: left;
+            transition: border-color 200ms ease, background-color 200ms ease, transform 200ms ease;
+            width: 100%;
+        }
+        .catalog-timeline-card:hover {
+            background: rgba(30, 41, 59, 0.9);
+            border-color: rgba(249, 115, 22, 0.65);
+            transform: translateY(-2px);
+        }
+        .catalog-status {
+            border: 1px solid;
+            border-radius: 9999px;
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            line-height: 1rem;
+            padding: 0.125rem 0.625rem;
+            position: absolute;
+            right: 1rem;
+            text-transform: uppercase;
+            top: 0.875rem;
+        }
+        .catalog-status-available {
+            background: rgba(6, 78, 59, 0.35);
+            border-color: rgba(16, 185, 129, 0.45);
+            color: #6ee7b7;
+        }
+        .catalog-status-coming-soon {
+            background: rgba(124, 45, 18, 0.3);
+            border-color: rgba(249, 115, 22, 0.4);
+            color: #fdba74;
+        }
+        .catalog-timeline-item::after {
+            background: #0a0d14;
+            border: 2px solid #f97316;
+            border-radius: 9999px;
+            box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.12), 0 0 16px rgba(249, 115, 22, 0.45);
+            content: "";
+            height: 0.875rem;
+            position: absolute;
+            left: -1.125rem;
+            top: 1.75rem;
+            transform: translateX(-50%);
+            width: 0.875rem;
+            z-index: 1;
+        }
+        .catalog-feature {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(51, 65, 85, 0.75);
+            border-radius: 9999px;
+            color: #cbd5e1;
+            font-size: 0.75rem;
+            line-height: 1.25rem;
+            padding: 0.125rem 0.625rem;
+        }
+        .catalog-timeline-item.catalog-reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 500ms ease, transform 500ms ease;
+        }
+        .catalog-timeline-item.catalog-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .catalog-timeline-item.catalog-reveal,
+            .catalog-timeline-card {
+                transition: none;
+            }
+            .catalog-timeline-card:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body class="bg-[#0a0d14] text-slate-100 font-sans antialiased selection:bg-orange-600 selection:text-white overflow-x-hidden relative">
@@ -236,74 +337,58 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-orange-400 font-semibold text-xs uppercase tracking-wider bg-orange-950/60 border border-orange-800/40 px-3 py-1 rounded-full">Catalog</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">Explore Our Software Products</h2>
-                <p class="mt-4 text-slate-400 text-base">Tested, reliable business software solutions ready for deployment.</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">Business Software for Every Industry</h2>
+                <p class="mt-4 text-slate-400 text-base">Explore our range of ready-made and custom POS, ERP, and business management systems.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-orange-500/50 hover:-translate-y-1.5 transition-all duration-300 shadow-lg">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-orange-950 text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-800/40">POS & Inventory</span>
-                            <span class="text-xs text-emerald-400 font-medium"><i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i> Available</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white">Retail POS System</h3>
-                        <p class="mt-2 text-slate-400 text-sm leading-relaxed">Comprehensive point-of-sale and stock management system built for retail shops and supermarkets.</p>
-                        <ul class="mt-4 space-y-2 text-xs text-slate-300">
-                            <li><i class="fa-solid fa-check text-orange-500 mr-2"></i> Fast Barcode Scanning</li>
-                            <li><i class="fa-solid fa-check text-orange-500 mr-2"></i> Inventory & Stock Alerts</li>
-                            <li><i class="fa-solid fa-check text-orange-500 mr-2"></i> Daily & Monthly Sales Reports</li>
-                        </ul>
-                    </div>
-                    <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">Monthly / One-Time</span>
-                        <a href="#contact" class="bg-orange-600 hover:bg-orange-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition transform active:scale-95">Enquire Now</a>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 hover:-translate-y-1.5 transition-all duration-300 shadow-lg">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-emerald-950 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800/40">Restaurant</span>
-                            <span class="text-xs text-emerald-400 font-medium"><i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i> Available</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white">Restaurant POS & KOT</h3>
-                        <p class="mt-2 text-slate-400 text-sm leading-relaxed">Table management, kitchen order tickets, and billing streamlined for dining and takeout establishments.</p>
-                        <ul class="mt-4 space-y-2 text-xs text-slate-300">
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> Table & Order Management</li>
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> Kitchen Display Integration</li>
-                            <li><i class="fa-solid fa-check text-emerald-500 mr-2"></i> Expense & Profit Tracking</li>
-                        </ul>
-                    </div>
-                    <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">Monthly / One-Time</span>
-                        <a href="#contact" class="bg-orange-600 hover:bg-orange-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition transform active:scale-95">Enquire Now</a>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-purple-500/50 hover:-translate-y-1.5 transition-all duration-300 shadow-lg">
-                    <div>
-                        <div class="flex justify-between items-center mb-4">
-                            <span class="bg-purple-950 text-purple-400 text-xs font-bold px-3 py-1 rounded-full border border-purple-800/40">Management</span>
-                            <span class="text-xs text-emerald-400 font-medium"><i class="fa-solid fa-circle text-[8px] mr-1 animate-pulse"></i> Available</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-white">Business ERP System</h3>
-                        <p class="mt-2 text-slate-400 text-sm leading-relaxed">Enterprise management tool covering invoicing, multi-user accounts, payroll, and reporting.</p>
-                        <ul class="mt-4 space-y-2 text-xs text-slate-300">
-                            <li><i class="fa-solid fa-check text-purple-500 mr-2"></i> Multi-user Role Access</li>
-                            <li><i class="fa-solid fa-check text-purple-500 mr-2"></i> Invoicing & Quotations</li>
-                            <li><i class="fa-solid fa-check text-purple-500 mr-2"></i> Advanced Analytics</li>
-                        </ul>
-                    </div>
-                    <div class="mt-8 pt-4 border-t border-slate-800 flex items-center justify-between">
-                        <span class="text-xs font-semibold text-slate-400">Monthly / One-Time</span>
-                        <a href="#contact" class="bg-orange-600 hover:bg-orange-500 text-white text-xs font-medium px-4 py-2 rounded-lg transition transform active:scale-95">Enquire Now</a>
-                    </div>
-                </div>
-            </div>
+            <ol class="catalog-timeline max-w-4xl mx-auto" aria-label="Softnix business software catalog">
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">01</span><h3 class="font-semibold text-sm sm:text-base text-white">Retail &amp; Grocery POS System</h3></div><p class="mt-2 text-sm text-slate-400">Speed up checkout and keep retail stock, pricing, and daily sales organized in one place.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Barcode checkout</li><li class="catalog-feature">Stock control</li><li class="catalog-feature">Price management</li><li class="catalog-feature">Sales reports</li><li class="catalog-feature">Returns handling</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">02</span><h3 class="font-semibold text-sm sm:text-base text-white">Cloud POS System</h3></div><p class="mt-2 text-sm text-slate-400">Manage sales and business performance across locations with securely synced cloud-based POS data.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Cloud data sync</li><li class="catalog-feature">Multi-branch view</li><li class="catalog-feature">Live sales reports</li><li class="catalog-feature">User permissions</li><li class="catalog-feature">Central product list</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">03</span><h3 class="font-semibold text-sm sm:text-base text-white">AI Powered POS System</h3></div><p class="mt-2 text-sm text-slate-400">Bring intelligent insights to sales and stock data to support faster, better-informed business decisions.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Sales insights</li><li class="catalog-feature">Demand trends</li><li class="catalog-feature">Stock alerts</li><li class="catalog-feature">Performance dashboards</li><li class="catalog-feature">POS reporting</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">04</span><h3 class="font-semibold text-sm sm:text-base text-white">Spice &amp; FMCG Distribution System</h3></div><p class="mt-2 text-sm text-slate-400">Coordinate FMCG orders, inventory, deliveries, and customer accounts from purchase through distribution.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Batch tracking</li><li class="catalog-feature">Order processing</li><li class="catalog-feature">Route planning</li><li class="catalog-feature">Customer accounts</li><li class="catalog-feature">Distribution reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">05</span><h3 class="font-semibold text-sm sm:text-base text-white">Restaurant POS System</h3></div><p class="mt-2 text-sm text-slate-400">Manage restaurant orders, tables, kitchen preparation, and billing through a connected POS workflow.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Table management</li><li class="catalog-feature">Order entry</li><li class="catalog-feature">Kitchen tickets</li><li class="catalog-feature">Split billing</li><li class="catalog-feature">Sales summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">06</span><h3 class="font-semibold text-sm sm:text-base text-white">Bookshop POS &amp; ERP System</h3></div><p class="mt-2 text-sm text-slate-400">Handle book sales, title and edition stock, supplier purchases, and shop performance in one system.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">ISBN/barcode lookup</li><li class="catalog-feature">Title inventory</li><li class="catalog-feature">Purchase orders</li><li class="catalog-feature">Sales billing</li><li class="catalog-feature">Stock reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">07</span><h3 class="font-semibold text-sm sm:text-base text-white">Grocery &amp; Supermarket POS</h3></div><p class="mt-2 text-sm text-slate-400">Keep busy grocery checkouts moving while monitoring products, replenishment, and store sales.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Fast barcode sales</li><li class="catalog-feature">Weighted items</li><li class="catalog-feature">Expiry tracking</li><li class="catalog-feature">Reorder alerts</li><li class="catalog-feature">Cashier reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">08</span><h3 class="font-semibold text-sm sm:text-base text-white">Hardware Store POS System</h3></div><p class="mt-2 text-sm text-slate-400">Track hardware products, units, suppliers, and sales across a broad and varied store inventory.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Product variants</li><li class="catalog-feature">Unit management</li><li class="catalog-feature">Barcode billing</li><li class="catalog-feature">Supplier records</li><li class="catalog-feature">Stock valuation</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">09</span><h3 class="font-semibold text-sm sm:text-base text-white">Construction Company Stock Management System</h3></div><p class="mt-2 text-sm text-slate-400">Monitor construction materials, site allocations, purchases, and usage to improve project stock control.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Site-wise inventory</li><li class="catalog-feature">Material requests</li><li class="catalog-feature">Issue tracking</li><li class="catalog-feature">Supplier purchases</li><li class="catalog-feature">Usage reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">10</span><h3 class="font-semibold text-sm sm:text-base text-white">Cinema &amp; Film Equipment Rental POS</h3></div><p class="mt-2 text-sm text-slate-400">Manage film and cinema equipment bookings, rental periods, availability, and returns with clear records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Equipment catalogue</li><li class="catalog-feature">Rental bookings</li><li class="catalog-feature">Availability calendar</li><li class="catalog-feature">Deposits &amp; billing</li><li class="catalog-feature">Return tracking</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">11</span><h3 class="font-semibold text-sm sm:text-base text-white">Pharma Distribution System</h3></div><p class="mt-2 text-sm text-slate-400">Organize pharmaceutical distribution from supplier purchases to batch-aware stock and customer deliveries.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Batch &amp; expiry records</li><li class="catalog-feature">Wholesale pricing</li><li class="catalog-feature">Order management</li><li class="catalog-feature">Delivery tracking</li><li class="catalog-feature">Account statements</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">12</span><h3 class="font-semibold text-sm sm:text-base text-white">Salon &amp; Spa POS System</h3></div><p class="mt-2 text-sm text-slate-400">Coordinate salon and spa appointments, services, product sales, and customer visit history.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Appointment calendar</li><li class="catalog-feature">Service menu</li><li class="catalog-feature">Customer profiles</li><li class="catalog-feature">Retail product sales</li><li class="catalog-feature">Staff commissions</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">13</span><h3 class="font-semibold text-sm sm:text-base text-white">Nail Arts POS System</h3></div><p class="mt-2 text-sm text-slate-400">Simplify nail studio bookings, service billing, client records, and retail product tracking.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Booking calendar</li><li class="catalog-feature">Service packages</li><li class="catalog-feature">Client history</li><li class="catalog-feature">Product inventory</li><li class="catalog-feature">Daily sales totals</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">14</span><h3 class="font-semibold text-sm sm:text-base text-white">Healthcare &amp; Clinic Store POS</h3></div><p class="mt-2 text-sm text-slate-400">Manage clinic-store sales and supplies with organized products, stock records, and purchase visibility.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Product billing</li><li class="catalog-feature">Stock monitoring</li><li class="catalog-feature">Expiry alerts</li><li class="catalog-feature">Supplier records</li><li class="catalog-feature">Sales summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">15</span><h3 class="font-semibold text-sm sm:text-base text-white">Hotel &amp; Hospitality POS System</h3></div><p class="mt-2 text-sm text-slate-400">Connect hospitality sales and service charges with guest accounts, outlets, and operational reporting.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Outlet billing</li><li class="catalog-feature">Guest accounts</li><li class="catalog-feature">Service charges</li><li class="catalog-feature">Staff permissions</li><li class="catalog-feature">Revenue reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">16</span><h3 class="font-semibold text-sm sm:text-base text-white">Quick Service (QSR) POS System</h3></div><p class="mt-2 text-sm text-slate-400">Move quick-service orders efficiently from counter entry to kitchen preparation and customer pickup.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Fast order entry</li><li class="catalog-feature">Combo management</li><li class="catalog-feature">Kitchen queue</li><li class="catalog-feature">Pickup status</li><li class="catalog-feature">Shift summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">17</span><h3 class="font-semibold text-sm sm:text-base text-white">Fitness &amp; Gym POS System</h3></div><p class="mt-2 text-sm text-slate-400">Keep gym memberships, renewals, service sales, and member activity organized for your fitness business.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Member profiles</li><li class="catalog-feature">Plan renewals</li><li class="catalog-feature">Visit tracking</li><li class="catalog-feature">Service billing</li><li class="catalog-feature">Membership reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">18</span><h3 class="font-semibold text-sm sm:text-base text-white">Bakery &amp; Pastry POS System</h3></div><p class="mt-2 text-sm text-slate-400">Manage bakery counter sales alongside fresh production, ingredient stock, and daily product demand.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Counter checkout</li><li class="catalog-feature">Production planning</li><li class="catalog-feature">Ingredient stock</li><li class="catalog-feature">Expiry monitoring</li><li class="catalog-feature">Daily sales reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">19</span><h3 class="font-semibold text-sm sm:text-base text-white">Gold Pawning ERP System</h3></div><p class="mt-2 text-sm text-slate-400">Record pawning transactions, item details, repayment schedules, and customer accounts with traceable records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Pawning contracts</li><li class="catalog-feature">Item &amp; valuation records</li><li class="catalog-feature">Interest schedules</li><li class="catalog-feature">Repayment tracking</li><li class="catalog-feature">Due-date reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">20</span><h3 class="font-semibold text-sm sm:text-base text-white">Osusala POS System (Aureum Luxe)</h3></div><p class="mt-2 text-sm text-slate-400">Support Osusala retail operations with connected product, checkout, inventory, and business reporting tools.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Retail checkout</li><li class="catalog-feature">Product catalogue</li><li class="catalog-feature">Stock control</li><li class="catalog-feature">User access</li><li class="catalog-feature">Sales analytics</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">21</span><h3 class="font-semibold text-sm sm:text-base text-white">Pharmacy POS System</h3></div><p class="mt-2 text-sm text-slate-400">Handle pharmacy counter sales with medicine-level inventory, expiry visibility, and clear transaction records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Medicine catalogue</li><li class="catalog-feature">Batch &amp; expiry alerts</li><li class="catalog-feature">Barcode billing</li><li class="catalog-feature">Supplier purchases</li><li class="catalog-feature">Sales reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">22</span><h3 class="font-semibold text-sm sm:text-base text-white">Apparel, Footwear &amp; Accessories POS</h3></div><p class="mt-2 text-sm text-slate-400">Sell fashion ranges while tracking size, colour, style, and stock movement across product variants.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Size &amp; colour variants</li><li class="catalog-feature">Barcode checkout</li><li class="catalog-feature">Stock transfers</li><li class="catalog-feature">Promotions</li><li class="catalog-feature">Product performance</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">23</span><h3 class="font-semibold text-sm sm:text-base text-white">Garment &amp; Boutique POS System</h3></div><p class="mt-2 text-sm text-slate-400">Organize boutique sales and garment stock with style variants, customer records, and sales insights.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Style catalogue</li><li class="catalog-feature">Size &amp; colour stock</li><li class="catalog-feature">Customer accounts</li><li class="catalog-feature">Discount controls</li><li class="catalog-feature">Sales summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">24</span><h3 class="font-semibold text-sm sm:text-base text-white">Flora &amp; Flower Shop POS</h3></div><p class="mt-2 text-sm text-slate-400">Track floral products, custom orders, delivery details, and perishable stock for flower shops.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Custom arrangements</li><li class="catalog-feature">Order scheduling</li><li class="catalog-feature">Delivery details</li><li class="catalog-feature">Fresh stock tracking</li><li class="catalog-feature">Customer records</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">25</span><h3 class="font-semibold text-sm sm:text-base text-white">Food &amp; Beverage POS System</h3></div><p class="mt-2 text-sm text-slate-400">Bring food and beverage orders, recipes, ingredient stock, and service billing into one workflow.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Menu management</li><li class="catalog-feature">Order processing</li><li class="catalog-feature">Recipe costing</li><li class="catalog-feature">Ingredient tracking</li><li class="catalog-feature">Revenue reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">26</span><h3 class="font-semibold text-sm sm:text-base text-white">Lodging &amp; Travel POS System</h3></div><p class="mt-2 text-sm text-slate-400">Coordinate travel and lodging bookings, customer payments, service charges, and trip records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Booking records</li><li class="catalog-feature">Customer profiles</li><li class="catalog-feature">Payment tracking</li><li class="catalog-feature">Itinerary details</li><li class="catalog-feature">Booking reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">27</span><h3 class="font-semibold text-sm sm:text-base text-white">Medical &amp; Pharma POS System</h3></div><p class="mt-2 text-sm text-slate-400">Support medical and pharmaceutical retail with itemized sales, stock monitoring, and supplier records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Product billing</li><li class="catalog-feature">Batch tracking</li><li class="catalog-feature">Expiry monitoring</li><li class="catalog-feature">Purchase management</li><li class="catalog-feature">Sales reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">28</span><h3 class="font-semibold text-sm sm:text-base text-white">Personal Care &amp; Fitness POS</h3></div><p class="mt-2 text-sm text-slate-400">Manage personal care and fitness services, packages, client visits, and product sales together.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Client profiles</li><li class="catalog-feature">Service packages</li><li class="catalog-feature">Visit history</li><li class="catalog-feature">Product checkout</li><li class="catalog-feature">Staff performance</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">29</span><h3 class="font-semibold text-sm sm:text-base text-white">Automotive &amp; Workshop POS</h3></div><p class="mt-2 text-sm text-slate-400">Connect automotive sales, parts inventory, workshop jobs, and customer service history.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Parts inventory</li><li class="catalog-feature">Service orders</li><li class="catalog-feature">Vehicle records</li><li class="catalog-feature">Labour billing</li><li class="catalog-feature">Job status tracking</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">30</span><h3 class="font-semibold text-sm sm:text-base text-white">Auto Repair Workshop POS</h3></div><p class="mt-2 text-sm text-slate-400">Track repair jobs from customer intake to parts, labour, invoicing, and vehicle handover.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Repair job cards</li><li class="catalog-feature">Vehicle history</li><li class="catalog-feature">Parts usage</li><li class="catalog-feature">Labour estimates</li><li class="catalog-feature">Invoice tracking</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">31</span><h3 class="font-semibold text-sm sm:text-base text-white">Engineering &amp; Materials ERP</h3></div><p class="mt-2 text-sm text-slate-400">Coordinate engineering materials, procurement, project allocations, and stock costs across operations.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Material catalogue</li><li class="catalog-feature">Purchase workflow</li><li class="catalog-feature">Project allocation</li><li class="catalog-feature">Cost tracking</li><li class="catalog-feature">Inventory reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">32</span><h3 class="font-semibold text-sm sm:text-base text-white">Bar &amp; Nightclub Restaurant POS</h3></div><p class="mt-2 text-sm text-slate-400">Manage bar tabs, table orders, menu stock, and shift sales in a fast-paced venue.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Open tabs</li><li class="catalog-feature">Table &amp; counter orders</li><li class="catalog-feature">Menu management</li><li class="catalog-feature">Stock deductions</li><li class="catalog-feature">Shift reconciliation</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">33</span><h3 class="font-semibold text-sm sm:text-base text-white">Camera Rental Management POS</h3></div><p class="mt-2 text-sm text-slate-400">Keep camera and production gear rentals organized with booking, availability, payment, and return records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Gear inventory</li><li class="catalog-feature">Rental calendar</li><li class="catalog-feature">Customer bookings</li><li class="catalog-feature">Deposit tracking</li><li class="catalog-feature">Return inspections</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">34</span><h3 class="font-semibold text-sm sm:text-base text-white">Electronics Sales &amp; Repair POS</h3></div><p class="mt-2 text-sm text-slate-400">Handle electronics retail alongside repair intake, serial-number records, parts, and warranty details.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Serial number tracking</li><li class="catalog-feature">Retail checkout</li><li class="catalog-feature">Repair job cards</li><li class="catalog-feature">Parts inventory</li><li class="catalog-feature">Warranty records</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">35</span><h3 class="font-semibold text-sm sm:text-base text-white">Jewellery Shop Management System</h3></div><p class="mt-2 text-sm text-slate-400">Manage jewellery items, detailed pricing, customer transactions, and stock with careful item-level records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Item &amp; purity records</li><li class="catalog-feature">Weight-based pricing</li><li class="catalog-feature">Barcode labels</li><li class="catalog-feature">Customer accounts</li><li class="catalog-feature">Stock valuation</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">36</span><h3 class="font-semibold text-sm sm:text-base text-white">Enterprise Retail ERP System</h3></div><p class="mt-2 text-sm text-slate-400">Unify enterprise retail operations across branches, purchasing, inventory, finance, and performance reporting.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Multi-branch operations</li><li class="catalog-feature">Central purchasing</li><li class="catalog-feature">Stock transfers</li><li class="catalog-feature">Role-based access</li><li class="catalog-feature">Consolidated reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">37</span><h3 class="font-semibold text-sm sm:text-base text-white">Employee Management System</h3></div><p class="mt-2 text-sm text-slate-400">Keep employee profiles, attendance, leave, and essential workforce records organized in one system.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Employee profiles</li><li class="catalog-feature">Attendance records</li><li class="catalog-feature">Leave management</li><li class="catalog-feature">Department records</li><li class="catalog-feature">Staff reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">38</span><h3 class="font-semibold text-sm sm:text-base text-white">Student Management System</h3></div><p class="mt-2 text-sm text-slate-400">Organize student records, class placements, attendance, assessments, and guardian contacts.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Student profiles</li><li class="catalog-feature">Class enrollment</li><li class="catalog-feature">Attendance tracking</li><li class="catalog-feature">Assessment records</li><li class="catalog-feature">Guardian contacts</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">39</span><h3 class="font-semibold text-sm sm:text-base text-white">Learning Management System (LMS)</h3></div><p class="mt-2 text-sm text-slate-400">Structure learning programmes with course materials, learner progress, assessments, and completion records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Course management</li><li class="catalog-feature">Learning materials</li><li class="catalog-feature">Learner enrollment</li><li class="catalog-feature">Quizzes &amp; assessments</li><li class="catalog-feature">Progress tracking</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">40</span><h3 class="font-semibold text-sm sm:text-base text-white">Tuition Class Management System</h3></div><p class="mt-2 text-sm text-slate-400">Manage tuition classes, student enrollment, schedules, attendance, and fee collections.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Class schedules</li><li class="catalog-feature">Student enrollment</li><li class="catalog-feature">Attendance lists</li><li class="catalog-feature">Fee tracking</li><li class="catalog-feature">Class summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">41</span><h3 class="font-semibold text-sm sm:text-base text-white">Hospital Management System</h3></div><p class="mt-2 text-sm text-slate-400">Connect essential hospital administration, patient visits, appointments, billing, and department workflows.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Patient registration</li><li class="catalog-feature">Appointment scheduling</li><li class="catalog-feature">Billing records</li><li class="catalog-feature">Department workflows</li><li class="catalog-feature">Operational reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">42</span><h3 class="font-semibold text-sm sm:text-base text-white">School Management System</h3></div><p class="mt-2 text-sm text-slate-400">Bring school administration together with student records, attendance, classes, and communication.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Student records</li><li class="catalog-feature">Class timetables</li><li class="catalog-feature">Attendance registers</li><li class="catalog-feature">Exam records</li><li class="catalog-feature">Parent contacts</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">43</span><h3 class="font-semibold text-sm sm:text-base text-white">Cargo &amp; Logistics Management</h3></div><p class="mt-2 text-sm text-slate-400">Coordinate cargo bookings, shipment milestones, fleet assignments, delivery status, and logistics records.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Shipment bookings</li><li class="catalog-feature">Tracking milestones</li><li class="catalog-feature">Fleet assignments</li><li class="catalog-feature">Delivery records</li><li class="catalog-feature">Operations reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">44</span><h3 class="font-semibold text-sm sm:text-base text-white">HRIS &amp; Human Resources System</h3></div><p class="mt-2 text-sm text-slate-400">Centralize workforce information, attendance, leave, payroll inputs, and HR administration.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Employee database</li><li class="catalog-feature">Attendance management</li><li class="catalog-feature">Leave workflows</li><li class="catalog-feature">Payroll inputs</li><li class="catalog-feature">HR reports</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">45</span><h3 class="font-semibold text-sm sm:text-base text-white">Ice Cream POS &amp; Scoop ERP</h3></div><p class="mt-2 text-sm text-slate-400">Manage scoop-shop sales, flavours, portion sizes, ingredients, and daily production needs.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Flavour catalogue</li><li class="catalog-feature">Scoop size pricing</li><li class="catalog-feature">Ingredient usage</li><li class="catalog-feature">Batch tracking</li><li class="catalog-feature">Sales summaries</li></ul></article></li>
+                <li class="catalog-timeline-item"><article class="catalog-timeline-card"><div class="flex items-center gap-3"><span class="text-orange-400 font-mono text-xs font-bold">46</span><h3 class="font-semibold text-sm sm:text-base text-white">Laundry &amp; Dry Cleaning POS</h3></div><p class="mt-2 text-sm text-slate-400">Track garment orders from intake through cleaning, processing, payment, and customer collection.</p><ul class="mt-3 flex flex-wrap gap-2"><li class="catalog-feature">Order tagging</li><li class="catalog-feature">Service selection</li><li class="catalog-feature">Processing status</li><li class="catalog-feature">Collection tracking</li><li class="catalog-feature">Customer billing</li></ul></article></li>
+            </ol>
         </div>
     </section>
 
@@ -387,44 +472,84 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <span class="text-orange-400 font-semibold text-xs uppercase tracking-wider bg-orange-950/60 border border-orange-800/40 px-3 py-1 rounded-full">Transparent Pricing</span>
             <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-4">Flexible Options for Every Business</h2>
-            <p class="mt-4 text-slate-400 text-lg max-w-2xl mx-auto">Choose ready-made POS and business software or request a custom system, with monthly or one-time payment options.</p>
+            <p class="mt-4 text-slate-400 text-lg max-w-3xl mx-auto">Choose ready-made POS and business software with flexible offline and online licensing plans, or request a custom-tailored solution.</p>
 
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
-                <!-- Ready-Made Pricing -->
-                <div class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-3xl p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto text-left">
+                <article class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
                     <div>
                         <span class="bg-orange-950 text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-800/40">Ready-Made Software</span>
-                        <h3 class="text-2xl font-bold text-white mt-4">Standard Products</h3>
-                        <p class="text-slate-400 text-sm mt-2">Ready-to-use POS and business software, including inventory tools.</p>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-4">100% Offline Package</h3>
+                        <p class="text-slate-400 text-sm mt-2">A standalone solution for businesses that want local, offline operation.</p>
                         <div class="mt-6 space-y-3 text-sm text-slate-300">
-                            <div><i class="fa-solid fa-check text-orange-500 mr-2"></i> Monthly Payments or One-Time Purchase</div>
-                            <div><i class="fa-solid fa-check text-orange-500 mr-2"></i> Core Feature Updates</div>
-                            <div><i class="fa-solid fa-check text-orange-500 mr-2"></i> Initial Setup & Training Assistance</div>
+                            <p><span class="font-semibold text-white">One-Time / Normal Purchase:</span> Rs. 18,000 <span class="text-slate-400">(Advance: Rs. 45,000)</span></p>
+                            <p><span class="font-semibold text-white">Monthly Subscription:</span> Rs. 600 <span class="text-slate-400">(Advance: Rs. 1,500)</span></p>
                         </div>
+                        <ul class="mt-6 space-y-2 text-sm text-slate-300">
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Fully offline standalone operation</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Fast billing</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Local inventory management</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Setup assistance</li>
+                        </ul>
                     </div>
-                    <div class="mt-8 pt-6 border-t border-slate-800">
-                        <a href="#contact" class="block text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition text-sm">Request Pricing & Demo</a>
-                    </div>
-                </div>
+                    <a href="#contact" class="mt-8 block text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition text-sm">Enquire About Offline Plan</a>
+                </article>
 
-                <!-- Custom Dev Pricing -->
-                <div class="bg-[#111827]/90 backdrop-blur border-2 border-orange-600 rounded-3xl p-8 flex flex-col justify-between relative shadow-xl shadow-orange-950/50 hover:scale-[1.01] transition-transform">
+                <article class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+                    <div>
+                        <span class="bg-sky-950 text-sky-400 text-xs font-bold px-3 py-1 rounded-full border border-sky-800/40">Ready-Made Software</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-4">100% Online-Only Package</h3>
+                        <p class="text-slate-400 text-sm mt-2">Access your cloud-based system across devices with real-time data synchronization.</p>
+                        <div class="mt-6 space-y-3 text-sm text-slate-300">
+                            <p><span class="font-semibold text-white">One-Time / Normal Purchase:</span> Rs. 22,000 <span class="text-slate-400">(Advance: Rs. 56,000)</span></p>
+                            <p><span class="font-semibold text-white">Monthly Subscription:</span> Rs. 1,200 <span class="text-slate-400">(Advance: Rs. 3,000)</span></p>
+                        </div>
+                        <ul class="mt-6 space-y-2 text-sm text-slate-300">
+                            <li><i class="fa-solid fa-check text-sky-400 mr-2"></i> Cloud-based accessibility</li>
+                            <li><i class="fa-solid fa-check text-sky-400 mr-2"></i> Real-time data sync</li>
+                            <li><i class="fa-solid fa-check text-sky-400 mr-2"></i> Multi-device support</li>
+                            <li><i class="fa-solid fa-check text-sky-400 mr-2"></i> Automatic updates</li>
+                        </ul>
+                        <p class="mt-5 text-xs text-slate-400">Includes 1GB cloud storage/data. Additional GBs can be purchased separately as required.</p>
+                    </div>
+                    <a href="#contact" class="mt-8 block text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition text-sm">Enquire About Online Plan</a>
+                </article>
+
+                <article class="bg-[#111827]/80 backdrop-blur border border-slate-800 rounded-3xl p-7 sm:p-8 flex flex-col justify-between hover:border-slate-700 transition shadow-lg">
+                    <div>
+                        <span class="bg-emerald-950 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-800/40">Ready-Made Software</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-4">Online + Offline Hybrid Package</h3>
+                        <p class="text-slate-400 text-sm mt-2">Keep billing running offline and sync your data to the cloud automatically.</p>
+                        <div class="mt-6 space-y-3 text-sm text-slate-300">
+                            <p><span class="font-semibold text-white">One-Time / Normal Purchase:</span> Rs. 26,000 <span class="text-slate-400">(Advance: Rs. 59,000)</span></p>
+                            <p><span class="font-semibold text-white">Monthly Subscription:</span> Rs. 1,500 <span class="text-slate-400">(Advance: Rs. 3,300)</span></p>
+                        </div>
+                        <ul class="mt-6 space-y-2 text-sm text-slate-300">
+                            <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Uninterrupted offline billing</li>
+                            <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Automatic cloud synchronization</li>
+                            <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Cloud backup</li>
+                            <li><i class="fa-solid fa-check text-emerald-400 mr-2"></i> Online access to synced data</li>
+                        </ul>
+                        <p class="mt-5 text-xs text-slate-400">Includes 1GB cloud storage/data. Additional GBs can be purchased separately as required.</p>
+                    </div>
+                    <a href="#contact" class="mt-8 block text-center bg-slate-800 hover:bg-slate-700 text-white font-medium py-3 rounded-xl transition text-sm">Enquire About Hybrid Plan</a>
+                </article>
+
+                <article class="bg-[#111827]/90 backdrop-blur border-2 border-orange-600 rounded-3xl p-7 sm:p-8 flex flex-col justify-between relative shadow-xl shadow-orange-950/50 hover:scale-[1.01] transition-transform">
                     <span class="absolute -top-3 right-8 bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">Custom</span>
                     <div>
-                        <span class="bg-orange-950 text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-800/40">Custom Business Software</span>
-                        <h3 class="text-2xl font-bold text-white mt-4">Tailor-Made Solutions</h3>
-                        <p class="text-slate-400 text-sm mt-2">Priced transparently based on your project scope and specifications.</p>
-                        <div class="mt-6 space-y-3 text-sm text-slate-300">
-                            <div><i class="fa-solid fa-check text-orange-400 mr-2"></i> Custom Features & Workflows</div>
-                            <div><i class="fa-solid fa-check text-orange-400 mr-2"></i> Custom POS, desktop, and inventory systems</div>
-                            <div><i class="fa-solid fa-check text-orange-400 mr-2"></i> Optional mobile companion apps for your system</div>
-                            <div><i class="fa-solid fa-check text-orange-400 mr-2"></i> Detailed Quotation & Project Scope</div>
-                        </div>
+                        <span class="bg-orange-950 text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-800/40">Custom Development</span>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white mt-4">Tailor-Made Solutions</h3>
+                        <p class="text-slate-400 text-sm mt-2">Custom-built software, scoped and priced transparently around your requirements.</p>
+                        <p class="mt-6 text-sm font-semibold text-white">Starting from Rs. 20,000 upwards</p>
+                        <ul class="mt-6 space-y-2 text-sm text-slate-300">
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Custom features and workflows</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Tailored desktop and POS systems</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Specific database requirements</li>
+                            <li><i class="fa-solid fa-check text-orange-400 mr-2"></i> Dedicated support</li>
+                        </ul>
                     </div>
-                    <div class="mt-8 pt-6 border-t border-slate-800">
-                        <a href="#contact" class="block text-center bg-orange-600 hover:bg-orange-500 text-white font-medium py-3 rounded-xl transition shadow-lg shadow-orange-600/30 text-sm">Get a Custom Quote</a>
-                    </div>
-                </div>
+                    <a href="#contact" class="mt-8 block text-center bg-orange-600 hover:bg-orange-500 text-white font-medium py-3 rounded-xl transition shadow-lg shadow-orange-600/30 text-sm">Get a Custom Quote</a>
+                </article>
             </div>
         </div>
     </section>
@@ -841,6 +966,43 @@
         btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
         });
+
+        const catalogItems = document.querySelectorAll('.catalog-timeline-item');
+        catalogItems.forEach((item, index) => {
+            const status = document.createElement('span');
+            const isAvailable = index < 3;
+            status.className = `catalog-status ${isAvailable ? 'catalog-status-available' : 'catalog-status-coming-soon'}`;
+            status.textContent = isAvailable ? 'Available' : 'Coming Soon';
+            item.querySelector('.catalog-timeline-card').prepend(status);
+        });
+
+        if (!reduceMotion && 'IntersectionObserver' in window) {
+            let lastScrollY = window.scrollY;
+            let scrollDirection = 1;
+
+            window.addEventListener('scroll', () => {
+                const currentScrollY = window.scrollY;
+                if (currentScrollY !== lastScrollY) {
+                    scrollDirection = currentScrollY < lastScrollY ? -1 : 1;
+                    lastScrollY = currentScrollY;
+                }
+            }, { passive: true });
+
+            const catalogObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else if (scrollDirection < 0) {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            catalogItems.forEach((item) => {
+                item.classList.add('catalog-reveal');
+                catalogObserver.observe(item);
+            });
+        }
 
     </script>
 </body>

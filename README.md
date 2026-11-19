@@ -1,4 +1,4 @@
-# softnix.online
+# softnix.online V1.2
 
 This is a static GitHub Pages website with a Cloudflare Worker for quotation email delivery. `index.html` contains the responsive single-page site, styles, and client-side interactions. The primary navigation points to Home, About, Products, Custom Development, Pricing, and Contact sections; Get Quote opens the quotation form.
 
